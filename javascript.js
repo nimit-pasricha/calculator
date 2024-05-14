@@ -58,6 +58,7 @@ function displayResult() {
             display.textContent = secondNumber;
           }
           break;
+
         case "+":
         case "-":
         case "*":
@@ -73,10 +74,12 @@ function displayResult() {
             secondNumber = 0;
           }
           break;
+
         case "=":
           displayValue = operate(firstNumber, secondNumber, operator);
           display.textContent = displayValue;
           break;
+
         case "Clear":
           firstNumber = 0;
           secondNumber = 0;
