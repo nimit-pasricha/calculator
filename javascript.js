@@ -11,7 +11,11 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
-  return +num1 / +num2;
+  if (num2 == 0) {
+    return "Clown Behavior";
+  } else {
+    return +num1 / +num2;
+  }
 }
 
 let firstNumber = 0;
@@ -43,6 +47,14 @@ function displayResult() {
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
+      if (displayValue === "Clown Behavior") {
+        firstNumber = 0;
+        secondNumber = 0;
+        operator = null;
+        displayValue = null;
+        display.textContent = 0;
+      }
+
       switch (button.textContent) {
         case "0":
         case "1":
