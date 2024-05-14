@@ -15,7 +15,7 @@ function divide(num1, num2) {
 }
 
 let firstNumber = 0;
-let secondNumber = null;
+let secondNumber = 0;
 let operator = null;
 let displayValue = null;
 
@@ -52,25 +52,38 @@ function displayResult() {
         case "9":
           if (operator === null) {
             firstNumber = (firstNumber * 10 + +button.textContent).toString();
+            display.textContent = firstNumber;
           } else {
-            secondNumber = button.textContent;
-            displayValue = operate(firstNumber, secondNumber, operator);
-            console.log(displayValue);
-            firstNumber = secondNumber;
-            operator = null;
+            secondNumber = (secondNumber * 10 + +button.textContent).toString();
+            display.textContent = secondNumber;
           }
           break;
         case "+":
         case "-":
         case "*":
         case "/":
-          operator = button.textContent;
-          console.log(operator);
-          if (secondNumber !== null) {
+          if (secondNumber === 0) {
+            operator = button.textContent;
+            display.textContent = firstNumber;
+          } else {
+            displayValue = operate(firstNumber, secondNumber, operator);
+            display.textContent = displayValue;
+            operator = button.textContent;
             firstNumber = displayValue;
+            secondNumber = 0;
           }
+          break;
+        case "=":
+          displayValue = operate(firstNumber, secondNumber, operator);
+          display.textContent = displayValue;
+          break;
+        case "Clear":
+          firstNumber = 0;
+          secondNumber = 0;
+          operator = null;
+          displayValue = null;
+          display.textContent = firstNumber;
       }
-      display.textContent = firstNumber;
     });
   });
 }
