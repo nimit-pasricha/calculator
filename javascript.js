@@ -1,43 +1,39 @@
 function add(num1, num2) {
-  return num1 + num2;
+  return +num1 + +num2;
 }
 
 function subtract(num1, num2) {
-  return num1 - num2;
+  return +num1 - +num2;
 }
 
 function multiply(num1, num2) {
-  return num1 * num2;
+  return +num1 * +num2;
 }
 
 function divide(num1, num2) {
-  return num1 / num2;
+  return +num1 / +num2;
 }
 
-let firstNumber;
-let secondNumber;
+let firstNumber = 0;
+let secondNumber = null;
 let operator = null;
+let displayValue = null;
 
 function operate(num1, num2, operation) {
   switch (operation) {
     case "+":
-      add(num1, num2);
-      break;
+      return add(num1, num2);
     case "-":
-      subtract(num1, num2);
-      break;
+      return subtract(num1, num2);
     case "*":
-      multiply(num1, num2);
-      break;
+      return multiply(num1, num2);
     case "/":
-      divide(num1, num2);
-      break;
+      return divide(num1, num2);
   }
 }
 // TODO: Make the read and the display happen in the same method
 // otherwise shit just wont work
 function displayResult() {
-  let displayValue = null;
   const display = document.querySelector(".display");
   const buttons = document.querySelectorAll("button");
 
@@ -54,13 +50,25 @@ function displayResult() {
         case "7":
         case "8":
         case "9":
-          if (operator !== null) {
-            firstNumber = button.textContent;
+          if (operator === null) {
+            firstNumber = (firstNumber * 10 + +button.textContent).toString();
           } else {
-            displayValue = operate(firstNumber, button.textContent, operator);
-            firstNumber = button.textContent;
+            secondNumber = button.textContent;
+            displayValue = operate(firstNumber, secondNumber, operator);
+            console.log(displayValue);
+            firstNumber = secondNumber;
+            operator = null;
           }
           break;
+        case "+":
+        case "-":
+        case "*":
+        case "/":
+          operator = button.textContent;
+          console.log(operator);
+          if (secondNumber !== null) {
+            firstNumber = displayValue;
+          }
       }
       display.textContent = firstNumber;
     });
