@@ -29,12 +29,16 @@ function operate(num1, num2, operation) {
       return multiply(num1, num2);
     case "/":
       return divide(num1, num2);
+    default:
+      return num1;
   }
 }
 // TODO: Make the read and the display happen in the same method
 // otherwise shit just wont work
 function displayResult() {
   const display = document.querySelector(".display");
+  display.textContent = 0;
+
   const buttons = document.querySelectorAll("button");
 
   buttons.forEach((button) => {
