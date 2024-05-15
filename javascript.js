@@ -66,24 +66,20 @@ function displayResult() {
         case "7":
         case "8":
         case "9":
-          if (operator === null) {
+          if (operator === null || operator === "=") {
             // if operator is null, we are still taking the first operand
             // (the a part of a + b)
-            if (firstNumber === 0) {
+            if (firstNumber.toString() === "0") {
               firstNumber = button.textContent;
               display.textContent = firstNumber;
             } else {
               firstNumber = firstNumber + button.textContent;
               display.textContent = firstNumber;
             }
-          } else if (operator === "=" && !isDecimalPoint) {
-            firstNumber = button.textContent;
-            display.textContent = firstNumber;
-            operator = null;
           } else {
             // if operator is not null, we are taking the second operand
             // (the b part of a + b)
-            if (secondNumber === 0) {
+            if (secondNumber.toString() === "0") {
               secondNumber = button.textContent;
               display.textContent = secondNumber;
             } else {
@@ -91,37 +87,46 @@ function displayResult() {
               display.textContent = secondNumber;
             }
           }
-          isDecimalPoint = false;
           break;
 
         case ".":
-          if (operator === null || operator === "=") {
+          if (operator === "=") {
+            firstNumber = 0 + ".";
+            display.textContent = firstNumber;
+          } else if (operator === null) {
             if (!firstNumber.toString().includes(".")) {
               firstNumber = firstNumber + ".";
-              isDecimalPoint = true;
             }
             display.textContent = firstNumber;
           } else {
-            if (!secondNumber.toString().includes(",")) {
+            if (!secondNumber.toString().includes(".")) {
               secondNumber = secondNumber + ".";
-              isDecimalPoint = true;
             }
             display.textContent = secondNumber;
           }
+          isDecimalPoint = true;
           break;
         case "+/-":
           if (operator === null || operator === "=") {
-            if (firstNumber.toString()[0] === "-") {
+            if (firstNumber.toString()[0] === "0") {
+              // do nothing
+            } else if (firstNumber.toString()[0] === "-") {
+              firstNumber = firstNumber.toString().slice(1);
+            } else {
               firstNumber = "-" + firstNumber;
             }
             display.textContent = firstNumber;
           } else {
-            if (!secondNumber.toString().includes(",")) {
-              secondNumber = secondNumber + ".";
-              isDecimalPoint = true;
+            if (secondNumber.toString()[0] === "0") {
+              // do nothing
+            } else if (secondNumber.toString()[0] === "-") {
+              secondNumber = secondNumber.toString().slice(1);
+            } else {
+              secondNumber = "-" + secondNumber;
             }
             display.textContent = secondNumber;
           }
+          break;
 
         case "+":
         case "-":
