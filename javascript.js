@@ -68,7 +68,7 @@ function displayResult() {
         case "9":
           // check if we are dealing with the first number
           // or the second number
-          if (operator === null || operator === "=") {
+          if (operator === null) {
             if (firstNumber.toString() === "0") {
               firstNumber = button.textContent;
               display.textContent = firstNumber;
@@ -76,6 +76,14 @@ function displayResult() {
               firstNumber = firstNumber + button.textContent;
               display.textContent = firstNumber;
             }
+          } else if (operator === "=") {
+            if (isDecimalPoint) {
+              firstNumber = firstNumber + button.textContent;
+            } else {
+              firstNumber = button.textContent;
+            }
+            display.textContent = firstNumber;
+            operator = null;
           } else {
             if (secondNumber.toString() === "0") {
               secondNumber = button.textContent;
