@@ -10,6 +10,9 @@ function multiply(num1, num2) {
   return +num1 * +num2;
 }
 
+// TODO: Shrink the decimal numbers to fit the output window
+// eg: There should not be any 3.666666666666666666667. Shorted it
+// to fit the exact width of the window
 function divide(num1, num2) {
   if (num2 == 0) {
     return "Clown Behavior";
@@ -22,6 +25,8 @@ let firstNumber = 0;
 let secondNumber = 0;
 let operator = null;
 let displayValue = null;
+const buttons = document.querySelectorAll("button");
+const display = document.querySelector(".display");
 
 function operate(num1, num2, operation) {
   switch (operation) {
@@ -37,22 +42,15 @@ function operate(num1, num2, operation) {
       return num1;
   }
 }
-// TODO: Make the read and the display happen in the same method
-// otherwise shit just wont work
-function displayResult() {
-  const display = document.querySelector(".display");
-  display.textContent = 0;
 
-  const buttons = document.querySelectorAll("button");
+function displayResult() {
+  display.textContent = 0;
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       if (displayValue === "Clown Behavior") {
         firstNumber = 0;
-        secondNumber = 0;
-        operator = null;
-        displayValue = null;
-        display.textContent = 0;
+        resetCalculator();
       }
 
       switch (button.textContent) {
@@ -67,9 +65,13 @@ function displayResult() {
         case "8":
         case "9":
           if (operator === null) {
+            // if operator is null, we are still on the first operand
+            // (the a part of a + b)
             firstNumber = (firstNumber * 10 + +button.textContent).toString();
             display.textContent = firstNumber;
           } else {
+            // if operator is not null, we are on the second operand
+            // (the b part of a + b)
             secondNumber = (secondNumber * 10 + +button.textContent).toString();
             display.textContent = secondNumber;
           }
@@ -80,13 +82,23 @@ function displayResult() {
         case "*":
         case "/":
           if (secondNumber === 0) {
+            // if we don't have a second number yet, we simply
+            // setup this operator in preparation of that second
+            // number
             operator = button.textContent;
             display.textContent = firstNumber;
           } else {
+            // if we have a second operator, we first have to evalutate
+            // the current expression AND THEN setup this new operator
+            // in preparation for the next number
             displayValue = operate(firstNumber, secondNumber, operator);
             display.textContent = displayValue;
             operator = button.textContent;
+            // this is done because the displayValue is what our
+            // NEXT operation is going to act on
             firstNumber = displayValue;
+            // we've resolved the current expression and reset
+            // secondNumber to accept a new number from the user
             secondNumber = 0;
           }
           break;
@@ -97,13 +109,17 @@ function displayResult() {
           break;
 
         case "Clear":
-          firstNumber = 0;
-          secondNumber = 0;
-          operator = null;
-          displayValue = null;
-          display.textContent = firstNumber;
+          resetCalculator();
       }
     });
   });
 }
 displayResult();
+
+function resetCalculator() {
+  firstNumber = 0;
+  secondNumber = 0;
+  operator = null;
+  displayValue = null;
+  display.textContent = firstNumber;
+}
