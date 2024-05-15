@@ -68,8 +68,13 @@ function displayResult() {
           if (operator === null) {
             // if operator is null, we are still taking the first operand
             // (the a part of a + b)
-            firstNumber = (firstNumber * 10 + +button.textContent).toString();
-            display.textContent = firstNumber;
+            if (firstNumber === 0) {
+              firstNumber = button.textContent;
+              display.textContent = firstNumber;
+            } else {
+              firstNumber = firstNumber + button.textContent;
+              display.textContent = firstNumber;
+            }
           } else if (operator === "=") {
             firstNumber = button.textContent;
             display.textContent = firstNumber;
@@ -77,8 +82,13 @@ function displayResult() {
           } else {
             // if operator is not null, we are taking the second operand
             // (the b part of a + b)
-            secondNumber = (secondNumber * 10 + +button.textContent).toString();
-            display.textContent = secondNumber;
+            if (secondNumber === 0) {
+              secondNumber = button.textContent;
+              display.textContent = secondNumber;
+            } else {
+              secondNumber = secondNumber + button.textContent;
+              display.textContent = secondNumber;
+            }
           }
           break;
 
