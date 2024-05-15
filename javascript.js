@@ -27,6 +27,7 @@ let operator = null;
 let displayValue = null;
 const buttons = document.querySelectorAll("button");
 const display = document.querySelector(".display");
+let isDecimalPoint = false;
 
 function operate(num1, num2, operation) {
   switch (operation) {
@@ -75,7 +76,7 @@ function displayResult() {
               firstNumber = firstNumber + button.textContent;
               display.textContent = firstNumber;
             }
-          } else if (operator === "=") {
+          } else if (operator === "=" && !isDecimalPoint) {
             firstNumber = button.textContent;
             display.textContent = firstNumber;
             operator = null;
@@ -90,7 +91,37 @@ function displayResult() {
               display.textContent = secondNumber;
             }
           }
+          isDecimalPoint = false;
           break;
+
+        case ".":
+          if (operator === null || operator === "=") {
+            if (!firstNumber.toString().includes(".")) {
+              firstNumber = firstNumber + ".";
+              isDecimalPoint = true;
+            }
+            display.textContent = firstNumber;
+          } else {
+            if (!secondNumber.toString().includes(",")) {
+              secondNumber = secondNumber + ".";
+              isDecimalPoint = true;
+            }
+            display.textContent = secondNumber;
+          }
+          break;
+        case "+/-":
+          if (operator === null || operator === "=") {
+            if (firstNumber.toString()[0] === "-") {
+              firstNumber = "-" + firstNumber;
+            }
+            display.textContent = firstNumber;
+          } else {
+            if (!secondNumber.toString().includes(",")) {
+              secondNumber = secondNumber + ".";
+              isDecimalPoint = true;
+            }
+            display.textContent = secondNumber;
+          }
 
         case "+":
         case "-":
@@ -116,6 +147,7 @@ function displayResult() {
             // secondNumber to accept a new number from the user
             secondNumber = 0;
           }
+          isDecimalPoint = false;
           break;
 
         case "=":
@@ -124,6 +156,7 @@ function displayResult() {
           firstNumber = displayValue;
           operator = "=";
           secondNumber = null;
+          isDecimalPoint = false;
           break;
 
         case "Clear":
@@ -140,4 +173,5 @@ function resetCalculator() {
   operator = null;
   displayValue = null;
   display.textContent = firstNumber;
+  isDecimalPoint = false;
 }
