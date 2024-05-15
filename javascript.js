@@ -66,9 +66,9 @@ function displayResult() {
         case "7":
         case "8":
         case "9":
+          // check if we are dealing with the first number
+          // or the second number
           if (operator === null || operator === "=") {
-            // if operator is null, we are still taking the first operand
-            // (the a part of a + b)
             if (firstNumber.toString() === "0") {
               firstNumber = button.textContent;
               display.textContent = firstNumber;
@@ -77,8 +77,6 @@ function displayResult() {
               display.textContent = firstNumber;
             }
           } else {
-            // if operator is not null, we are taking the second operand
-            // (the b part of a + b)
             if (secondNumber.toString() === "0") {
               secondNumber = button.textContent;
               display.textContent = secondNumber;
@@ -133,23 +131,15 @@ function displayResult() {
         case "*":
         case "/":
           if (secondNumber === 0) {
-            // if we don't have a second number yet, we simply
-            // setup this operator in preparation of that second
-            // number
             operator = button.textContent;
             display.textContent = firstNumber;
           } else {
-            // if we have a second operator, we first have to evalutate
-            // the current expression AND THEN setup this new operator
-            // in preparation for the next number
             displayValue = operate(firstNumber, secondNumber, operator);
             display.textContent = displayValue;
             operator = button.textContent;
-            // this is done because the displayValue is what our
-            // NEXT operation is going to act on
+            // this is done because the displayValue is what we are going
+            // to operate on next
             firstNumber = displayValue;
-            // we've resolved the current expression and reset
-            // secondNumber to accept a new number from the user
             secondNumber = 0;
           }
           isDecimalPoint = false;
