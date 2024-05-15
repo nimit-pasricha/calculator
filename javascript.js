@@ -70,6 +70,10 @@ function displayResult() {
             // (the a part of a + b)
             firstNumber = (firstNumber * 10 + +button.textContent).toString();
             display.textContent = firstNumber;
+          } else if (operator === "=") {
+            firstNumber = button.textContent;
+            display.textContent = firstNumber;
+            operator = null;
           } else {
             // if operator is not null, we are taking the second operand
             // (the b part of a + b)
@@ -107,6 +111,9 @@ function displayResult() {
         case "=":
           displayValue = operate(firstNumber, secondNumber, operator);
           display.textContent = displayValue;
+          firstNumber = displayValue;
+          operator = "=";
+          secondNumber = null;
           break;
 
         case "Clear":
