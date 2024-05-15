@@ -43,6 +43,7 @@ function operate(num1, num2, operation) {
   }
 }
 
+// TODO: Add floating point functionality
 function displayResult() {
   display.textContent = 0;
 
@@ -65,12 +66,12 @@ function displayResult() {
         case "8":
         case "9":
           if (operator === null) {
-            // if operator is null, we are still on the first operand
+            // if operator is null, we are still taking the first operand
             // (the a part of a + b)
             firstNumber = (firstNumber * 10 + +button.textContent).toString();
             display.textContent = firstNumber;
           } else {
-            // if operator is not null, we are on the second operand
+            // if operator is not null, we are taking the second operand
             // (the b part of a + b)
             secondNumber = (secondNumber * 10 + +button.textContent).toString();
             display.textContent = secondNumber;
