@@ -114,18 +114,14 @@ function displayResult() {
           break;
         case "+/-":
           if (operator === null || operator === "=") {
-            if (firstNumber.toString()[0] === "0") {
-              // do nothing
-            } else if (firstNumber.toString()[0] === "-") {
+            if (firstNumber.toString()[0] === "-") {
               firstNumber = firstNumber.toString().slice(1);
             } else {
               firstNumber = "-" + firstNumber;
             }
             display.textContent = firstNumber;
           } else {
-            if (secondNumber.toString()[0] === "0") {
-              // do nothing
-            } else if (secondNumber.toString()[0] === "-") {
+            if (secondNumber.toString()[0] === "-") {
               secondNumber = secondNumber.toString().slice(1);
             } else {
               secondNumber = "-" + secondNumber;
