@@ -15,9 +15,14 @@ function multiply(num1, num2) {
 // to fit the exact width of the window
 function divide(num1, num2) {
   if (num2 == 0) {
-    return "Clown Behavior";
+    return "🤡";
   } else {
-    return +num1 / +num2;
+    const result = +num1 / +num2;
+    if (result.toString().length > 12) {
+      return +result.toString().substring(0, 11);
+    } else {
+      return result;
+    }
   }
 }
 
