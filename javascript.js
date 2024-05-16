@@ -7,7 +7,12 @@ function subtract(num1, num2) {
 }
 
 function multiply(num1, num2) {
-  return +num1 * +num2;
+  const result = +num1 * +num2;
+  if (result.toString().length > 11) {
+    return result.toExponential(2);
+  } else {
+    return result;
+  }
 }
 
 // TODO: Shrink the decimal numbers to fit the output window
@@ -19,7 +24,7 @@ function divide(num1, num2) {
   } else {
     const result = +num1 / +num2;
     if (result.toString().length > 11) {
-      return +result.toExponential(2);
+      return result.toExponential(2);
     } else {
       return result;
     }
