@@ -1,0 +1,23 @@
+body {
+  background-color: blue;
+}
+
+#display {
+  color: white;
+}
+
+button {
+  background-color: white;
+  border-color: lightblue;
+  border-radius: 10px;
+  height: 100px;
+  width: 100px;
+}
+
+#clear {
+  width: 204px;
+}
+
+#equal {
+  width: 204px;
+}
