@@ -1,9 +1,19 @@
 function add(num1, num2) {
-  return +num1 + +num2;
+  const result = +num1 + +num2;
+  if (result.toString().length > 10) {
+    return result.toExponential(2);
+  } else {
+    return result;
+  }
 }
 
 function subtract(num1, num2) {
-  return +num1 - +num2;
+  const result = +num1 - +num2;
+  if (result.toString().length > 10) {
+    return result.toExponential(2);
+  } else {
+    return result;
+  }
 }
 
 function multiply(num1, num2) {
