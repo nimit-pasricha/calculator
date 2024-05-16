@@ -9,22 +9,20 @@ body {
 
 #display {
   color: white;
+  padding-right: 8px;
 }
 
 button {
   background-color: white;
   border-color: lightblue;
-  border-radius: 8px;
+  border-radius: 12px;
   height: 96px;
   width: 96px;
   font-size: 32px;
   color: deepskyblue;
 }
 
-#clear {
-  width: 196px;
-}
-
+#clear,
 #equal {
   width: 196px;
 }
@@ -40,6 +38,6 @@ button {
   gap: 4px;
 }
 
-.display {
-  font-size: 24px;
+.operator {
+  background-color: rgba(238, 237, 237, 0.9);
 }
