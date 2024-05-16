@@ -18,8 +18,8 @@ function divide(num1, num2) {
     return "🤡";
   } else {
     const result = +num1 / +num2;
-    if (result.toString().length > 12) {
-      return +result.toString().substring(0, 11);
+    if (result.toString().length > 11) {
+      return +result.toExponential(2);
     } else {
       return result;
     }
