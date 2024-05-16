@@ -27,6 +27,7 @@ let operator = null;
 let displayValue = null;
 const buttons = document.querySelectorAll("button");
 const display = document.querySelector("#display");
+display.style.fontSize = "64px";
 let isDecimalPoint = false;
 
 function operate(num1, num2, operation) {
