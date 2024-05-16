@@ -8,7 +8,7 @@ function subtract(num1, num2) {
 
 function multiply(num1, num2) {
   const result = +num1 * +num2;
-  if (result.toString().length > 11) {
+  if (result.toString().length > 10) {
     return result.toExponential(2);
   } else {
     return result;
@@ -23,7 +23,7 @@ function divide(num1, num2) {
     return "🤡";
   } else {
     const result = +num1 / +num2;
-    if (result.toString().length > 11) {
+    if (result.toString().length > 10) {
       return result.toExponential(2);
     } else {
       return result;
@@ -84,7 +84,9 @@ function displayResult() {
               firstNumber = button.textContent;
               display.textContent = firstNumber;
             } else {
-              firstNumber = firstNumber + button.textContent;
+              if (firstNumber.toString().length < 10) {
+                firstNumber = firstNumber + button.textContent;
+              }
               display.textContent = firstNumber;
             }
           } else if (operator === "=") {
@@ -100,7 +102,9 @@ function displayResult() {
               secondNumber = button.textContent;
               display.textContent = secondNumber;
             } else {
-              secondNumber = secondNumber + button.textContent;
+              if (secondNumber.toString().length < 10) {
+                secondNumber = secondNumber + button.textContent;
+              }
               display.textContent = secondNumber;
             }
           }
@@ -111,12 +115,18 @@ function displayResult() {
             firstNumber = 0 + ".";
             display.textContent = firstNumber;
           } else if (operator === null) {
-            if (!firstNumber.toString().includes(".")) {
+            if (
+              !firstNumber.toString().includes(".") &&
+              firstNumber.toString().length < 10
+            ) {
               firstNumber = firstNumber + ".";
             }
             display.textContent = firstNumber;
           } else {
-            if (!secondNumber.toString().includes(".")) {
+            if (
+              !secondNumber.toString().includes(".") &&
+              secondNumber.toString().length < 10
+            ) {
               secondNumber = secondNumber + ".";
             }
             display.textContent = secondNumber;
@@ -127,14 +137,14 @@ function displayResult() {
           if (operator === null || operator === "=") {
             if (firstNumber.toString()[0] === "-") {
               firstNumber = firstNumber.toString().slice(1);
-            } else {
+            } else if (firstNumber.toString().length < 11) {
               firstNumber = "-" + firstNumber;
             }
             display.textContent = firstNumber;
           } else {
             if (secondNumber.toString()[0] === "-") {
               secondNumber = secondNumber.toString().slice(1);
-            } else {
+            } else if (secondNumber.toString().length < 11) {
               secondNumber = "-" + secondNumber;
             }
             display.textContent = secondNumber;
