@@ -1,7 +1,12 @@
 function add(num1, num2) {
   const result = +num1 + +num2;
   if (result.toString().length > 10) {
-    return result.toExponential(2);
+    const scientificNotation = result.toExponential(2);
+    if (scientificNotation.toString().split("e")[1].length <= 2) {
+      return result.toFixed(getDigitsBeforeDecimal(result));
+    } else {
+      return scientificNotation;
+    }
   } else {
     return result;
   }
@@ -10,7 +15,12 @@ function add(num1, num2) {
 function subtract(num1, num2) {
   const result = +num1 - +num2;
   if (result.toString().length > 10) {
-    return result.toExponential(2);
+    const scientificNotation = result.toExponential(2);
+    if (scientificNotation.toString().split("e")[1].length <= 2) {
+      return result.toFixed(getDigitsBeforeDecimal(result));
+    } else {
+      return scientificNotation;
+    }
   } else {
     return result;
   }
