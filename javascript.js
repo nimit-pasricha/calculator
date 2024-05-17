@@ -1,7 +1,12 @@
 function add(num1, num2) {
   const result = +num1 + +num2;
   if (result.toString().length > 10) {
-    return result.toExponential(2);
+    const scientificNotation = result.toExponential(2);
+    if (scientificNotation.split("e")[1].length <= 2) {
+      return result.toFixed(getDigitsBeforeDecimal(result)); //TODO
+    } else {
+      return scientificNotation;
+    }
   } else {
     return result;
   }
@@ -10,31 +15,56 @@ function add(num1, num2) {
 function subtract(num1, num2) {
   const result = +num1 - +num2;
   if (result.toString().length > 10) {
-    return result.toExponential(2);
-  } else {
-    return result;
+    if (result.toString().length > 10) {
+      const scientificNotation = result.toExponential(2);
+      if (scientificNotation.split("e")[1].length <= 2) {
+        return result.toFixed(getDigitsBeforeDecimal(result)); //TODO
+      } else {
+        return scientificNotation;
+      }
+    } else {
+      return result;
+    }
   }
 }
 
 function multiply(num1, num2) {
   const result = +num1 * +num2;
   if (result.toString().length > 10) {
-    return result.toExponential(2);
+    // TODO: 1/9 can be 0.111 instead of 1.11e-1
+    // Make it so that if that number after e is small
+    // enough that our boy will fit in, we should just
+    // print the number as a whole rather than use
+    // scientific notation
+    // TODO: DO THE ABOVE FOR ALL OPERATIONS
+    const scientificNotation = result.toExponential(2);
+    console.log(scientificNotation.split("e")[1].length);
+    if (scientificNotation.split("e")[1].length <= 2) {
+      return result.toFixed(getDigitsBeforeDecimal(result)); //TODO
+    } else {
+      return scientificNotation;
+    }
   } else {
     return result;
   }
 }
 
-// TODO: Shrink the decimal numbers to fit the output window
-// eg: There should not be any 3.666666666666666666667. Shorted it
-// to fit the exact width of the window
+function getDigitsBeforeDecimal(num) {
+  return 9 - num.toString().split(".")[0].length;
+}
+
 function divide(num1, num2) {
   if (num2 == 0) {
     return "🤡";
   } else {
     const result = +num1 / +num2;
     if (result.toString().length > 10) {
-      return result.toExponential(2);
+      const scientificNotation = result.toExponential(2);
+      if (scientificNotation.split("e")[1].length <= 2) {
+        return result.toFixed(getDigitsBeforeDecimal(result)); //TODO
+      } else {
+        return scientificNotation;
+      }
     } else {
       return result;
     }
@@ -65,7 +95,6 @@ function operate(num1, num2, operation) {
   }
 }
 
-// TODO: Add floating point functionality
 function displayResult() {
   display.textContent = 0;
 
