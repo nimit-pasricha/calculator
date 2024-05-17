@@ -43,6 +43,10 @@ function divide(num1, num2) {
   }
 }
 
+function getDigitsBeforeDecimal(num) {
+  return 9 - num.toString().split(".")[0].length;
+}
+
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = null;
