@@ -23,8 +23,7 @@ button {
   color: deepskyblue;
 }
 
-#clear,
-#equal {
+.wide-button {
   width: 196px;
 }
 
@@ -43,10 +42,6 @@ button {
   background-color: rgba(238, 237, 237, 0.9);
 }
 
-.row #clear {
+.meta {
   background-color: lightcyan;
-}
-
-.something {
-  background-color: lightblue;
 }
