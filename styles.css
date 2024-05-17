@@ -42,3 +42,11 @@ button {
 .operator {
   background-color: rgba(238, 237, 237, 0.9);
 }
+
+.row #clear {
+  background-color: lightcyan;
+}
+
+.something {
+  background-color: lightblue;
+}
