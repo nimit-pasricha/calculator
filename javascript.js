@@ -1,12 +1,7 @@
 function add(num1, num2) {
   const result = +num1 + +num2;
   if (result.toString().length > 10) {
-    const scientificNotation = result.toExponential(2);
-    if (scientificNotation.split("e")[1].length <= 2) {
-      return result.toFixed(getDigitsBeforeDecimal(result)); //TODO
-    } else {
-      return scientificNotation;
-    }
+    return result.toExponential(2);
   } else {
     return result;
   }
@@ -15,42 +10,19 @@ function add(num1, num2) {
 function subtract(num1, num2) {
   const result = +num1 - +num2;
   if (result.toString().length > 10) {
-    if (result.toString().length > 10) {
-      const scientificNotation = result.toExponential(2);
-      if (scientificNotation.split("e")[1].length <= 2) {
-        return result.toFixed(getDigitsBeforeDecimal(result)); //TODO
-      } else {
-        return scientificNotation;
-      }
-    } else {
-      return result;
-    }
+    return result.toExponential(2);
+  } else {
+    return result;
   }
 }
 
 function multiply(num1, num2) {
   const result = +num1 * +num2;
   if (result.toString().length > 10) {
-    // TODO: 1/9 can be 0.111 instead of 1.11e-1
-    // Make it so that if that number after e is small
-    // enough that our boy will fit in, we should just
-    // print the number as a whole rather than use
-    // scientific notation
-    // TODO: DO THE ABOVE FOR ALL OPERATIONS
-    const scientificNotation = result.toExponential(2);
-    console.log(scientificNotation.split("e")[1].length);
-    if (scientificNotation.split("e")[1].length <= 2) {
-      return result.toFixed(getDigitsBeforeDecimal(result)); //TODO
-    } else {
-      return scientificNotation;
-    }
+    return result.toExponential(2);
   } else {
     return result;
   }
-}
-
-function getDigitsBeforeDecimal(num) {
-  return 9 - num.toString().split(".")[0].length;
 }
 
 function divide(num1, num2) {
@@ -60,7 +32,7 @@ function divide(num1, num2) {
     const result = +num1 / +num2;
     if (result.toString().length > 10) {
       const scientificNotation = result.toExponential(2);
-      if (scientificNotation.split("e")[1].length <= 2) {
+      if (scientificNotation.toString().split("e")[1].length <= 2) {
         return result.toFixed(getDigitsBeforeDecimal(result)); //TODO
       } else {
         return scientificNotation;
@@ -69,6 +41,10 @@ function divide(num1, num2) {
       return result;
     }
   }
+}
+
+function getDigitsBeforeDecimal(num) {
+  return 9 - num.toString().split(".")[0].length;
 }
 
 let firstNumber = 0;
