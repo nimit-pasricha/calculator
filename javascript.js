@@ -93,6 +93,7 @@ function displayResult() {
           firstOperand = displayValue;
           secondOperand = 0;
           operator = null;
+          isFirstOperand = true;
       }
       display.textContent = displayValue;
     })
