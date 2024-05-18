@@ -21,6 +21,7 @@ function divide(num1, num2) {
 let firstOperand = null;
 let secondOperand = null;
 let operator = null;
+let displayValue = 0;
 
 function operate(num1, num2, operator) {
   switch (operator) {
@@ -37,7 +38,6 @@ function operate(num1, num2, operator) {
 
 function displayResultMouse() {
   let isFirstOperand = true;
-  let displayValue = 0;
   let isFirstOperandFloating = false;
   let isSecondOperandFloating = false;
 
@@ -172,7 +172,6 @@ displayResultMouse();
 
 function displayResultKeyboard() {
   let isFirstOperand = true;
-  let displayValue = 0;
   let isFirstOperandFloating = false;
   let isSecondOperandFloating = false;
 
