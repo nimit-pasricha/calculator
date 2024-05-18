@@ -69,6 +69,7 @@ function displayResult() {
             displayValue = firstOperand;
           }
           break;
+
         case "+/-":
           if (isFirstOperand) {
             firstOperand = -firstOperand;
@@ -78,6 +79,20 @@ function displayResult() {
             displayValue = secondOperand;
           }
           break;
+
+        case "Clear":
+          firstOperand = 0;
+          secondOperand = 0;
+          operator = null;
+          isFirstOperand = true;
+          displayValue = firstOperand;
+          break;
+
+        case "=":
+          displayValue = operate(firstOperand, secondOperand, operator);
+          firstOperand = displayValue;
+          secondOperand = 0;
+          operator = null;
       }
       display.textContent = displayValue;
     })
