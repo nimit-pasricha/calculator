@@ -62,17 +62,25 @@ function displayResult() {
             displayValue = firstOperand;
             isFirstOperand = true;
           } else if (isFirstOperand) {
-            if (firstOperand >= 0) {
-              firstOperand = firstOperand * 10 + +buttonContent;
+            if (isFirstOperandFloating) {
+              firstOperand = +(displayValue.toString() + buttonContent);
             } else {
-              firstOperand = firstOperand * 10 - +buttonContent;
+              if (firstOperand >= 0) {
+                firstOperand = firstOperand * 10 + +buttonContent;
+              } else {
+                firstOperand = firstOperand * 10 - +buttonContent;
+              }
             }
             displayValue = firstOperand;
           } else {
-            if (secondOperand >= 0) {
-              secondOperand = secondOperand * 10 + +buttonContent;
+            if (isSecondOperandFloating) {
+              secondOperand = +(displayValue.toString() + buttonContent);
             } else {
-              secondOperand = secondOperand * 10 - +buttonContent;
+              if (secondOperand >= 0) {
+                secondOperand = secondOperand * 10 + +buttonContent;
+              } else {
+                secondOperand = secondOperand * 10 - +buttonContent;
+              }
             }
             displayValue = secondOperand;
           }
@@ -102,6 +110,8 @@ function displayResult() {
           } else {
             displayValue = operate(firstOperand, secondOperand, operator);
             firstOperand = displayValue;
+            isFirstOperandFloating = false;
+            isSecondOperandFloating = false;
             secondOperand = null;
             operator = null;
             isFirstOperand = null;
@@ -119,6 +129,8 @@ function displayResult() {
             isFirstOperand = false;
             displayValue = firstOperand;
             secondOperand = null;
+            isFirstOperandFloating = false;
+            isSecondOperandFloating = false;
           }
           operator = buttonContent;
           break;
@@ -126,22 +138,26 @@ function displayResult() {
         case ".":
           if (isFirstOperand === null) {
             firstOperand = 0;
-            displayValue = firstOperand + ".";
+            firstOperand = firstOperand + ".";
             isFirstOperandFloating = true;
+            displayValue = firstOperand;
           } else if (isFirstOperand) {
             if (isFirstOperandFloating) {
               // do nothing
             } else {
-              displayValue = firstOperand + ".";
+              firstOperand = firstOperand + ".";
               isFirstOperandFloating = true;
             }
+            displayValue = firstOperand;
           } else {
             if (isSecondOperandFloating) {
               // do nothing
             } else {
-              displayValue = secondOperand + ".";
+              console.log("Hello");
+              secondOperand = secondOperand + ".";
               isSecondOperandFloating = true;
             }
+            displayValue = secondOperand;
           }
       }
       display.textContent = displayValue;
