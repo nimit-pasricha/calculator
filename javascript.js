@@ -11,7 +11,11 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
-  return num1 / num2;
+  if (num2 === 0) {
+    return "🤡";
+  } else {
+    return num1 / num2;
+  }
 }
 
 let firstOperand = null;
@@ -31,7 +35,7 @@ function operate(num1, num2, operator) {
   }
 }
 
-function displayResult() {
+function displayResultMouse() {
   let isFirstOperand = true;
   let displayValue = 0;
   let isFirstOperandFloating = false;
@@ -164,4 +168,137 @@ function displayResult() {
     })
   );
 }
-displayResult();
+displayResultMouse();
+
+function displayResultKeyboard() {
+  let isFirstOperand = true;
+  let displayValue = 0;
+  let isFirstOperandFloating = false;
+  let isSecondOperandFloating = false;
+
+  const display = document.querySelector("#display");
+  display.textContent = displayValue;
+  const body = document.querySelector("body");
+
+  body.addEventListener("keydown", (event) => {
+    const keyPressed = event.key.toString();
+    switch (keyPressed) {
+      case "0":
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+      case "7":
+      case "8":
+      case "9":
+        if (isFirstOperand === null) {
+          firstOperand = 0;
+          firstOperand = firstOperand * 10 + +keyPressed;
+          displayValue = firstOperand;
+          isFirstOperand = true;
+        } else if (isFirstOperand) {
+          if (isFirstOperandFloating) {
+            firstOperand = +(displayValue.toString() + keyPressed);
+          } else {
+            if (firstOperand >= 0) {
+              firstOperand = firstOperand * 10 + +keyPressed;
+            } else {
+              firstOperand = firstOperand * 10 - +keyPressed;
+            }
+          }
+          displayValue = firstOperand;
+        } else {
+          if (isSecondOperandFloating) {
+            secondOperand = +(displayValue.toString() + keyPressed);
+          } else {
+            if (secondOperand >= 0) {
+              secondOperand = secondOperand * 10 + +keyPressed;
+            } else {
+              secondOperand = secondOperand * 10 - +keyPressed;
+            }
+          }
+          displayValue = secondOperand;
+        }
+        break;
+
+      case "+/-":
+        if (isFirstOperand === null || isFirstOperand) {
+          firstOperand = -firstOperand;
+          displayValue = firstOperand;
+        } else {
+          secondOperand = -secondOperand;
+          displayValue = secondOperand;
+        }
+        break;
+
+      case "Clear":
+        firstOperand = null;
+        secondOperand = null;
+        operator = null;
+        isFirstOperand = true;
+        displayValue = 0;
+        break;
+
+      case "=":
+        if (secondOperand === null) {
+          // do nothing
+        } else {
+          displayValue = operate(firstOperand, secondOperand, operator);
+          firstOperand = displayValue;
+          isFirstOperandFloating = false;
+          isSecondOperandFloating = false;
+          secondOperand = null;
+          operator = null;
+          isFirstOperand = null;
+        }
+        break;
+
+      case "/":
+      case "*":
+      case "-":
+      case "+":
+        if (isFirstOperand === null || isFirstOperand) {
+          isFirstOperand = false;
+        } else {
+          firstOperand = operate(firstOperand, secondOperand, operator);
+          isFirstOperand = false;
+          displayValue = firstOperand;
+          secondOperand = null;
+          isFirstOperandFloating = false;
+          isSecondOperandFloating = false;
+        }
+        operator = keyPressed;
+        break;
+
+      case ".":
+        if (isFirstOperand === null) {
+          firstOperand = 0;
+          firstOperand = firstOperand + ".";
+          isFirstOperandFloating = true;
+          displayValue = firstOperand;
+          isFirstOperand = true;
+        } else if (isFirstOperand) {
+          if (isFirstOperandFloating) {
+            // do nothing
+          } else {
+            firstOperand = +firstOperand + ".";
+            isFirstOperandFloating = true;
+          }
+          displayValue = firstOperand;
+        } else {
+          if (isSecondOperandFloating) {
+            // do nothing
+          } else {
+            secondOperand = +secondOperand + ".";
+            isSecondOperandFloating = true;
+          }
+          displayValue = secondOperand;
+        }
+    }
+    display.textContent = displayValue;
+  });
+}
+
+displayResultKeyboard();
