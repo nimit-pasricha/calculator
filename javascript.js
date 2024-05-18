@@ -54,13 +54,30 @@ function displayResult() {
         case "8":
         case "9":
           if (isFirstOperand) {
-            firstOperand = firstOperand * 10 + +buttonContent;
-            console.log(displayValue);
+            if (firstOperand >= 0) {
+              firstOperand = firstOperand * 10 + +buttonContent;
+            } else {
+              firstOperand = firstOperand * 10 - +buttonContent;
+            }
             displayValue = firstOperand;
           } else {
-            secondOperand = secondOperand * 10 + +buttonContent;
+            if (secondOperand >= 0) {
+              secondOperand = secondOperand * 10 + +buttonContent;
+            } else {
+              secondOperand = secondOperand * 10 - +buttonContent;
+            }
+            displayValue = firstOperand;
+          }
+          break;
+        case "+/-":
+          if (isFirstOperand) {
+            firstOperand = -firstOperand;
+            displayValue = firstOperand;
+          } else {
+            secondOperand = -secondOperand;
             displayValue = secondOperand;
           }
+          break;
       }
       display.textContent = displayValue;
     })
