@@ -34,10 +34,12 @@ function operate(num1, num2, operator) {
 function displayResult() {
   let isFirstOperand = true;
   let displayValue = 0;
+
   const display = document.querySelector("#display");
   display.textContent = 0;
 
   const buttons = document.querySelectorAll("button");
+
   buttons.forEach((button) =>
     button.addEventListener("click", () => {
       const buttonContent = button.textContent;
@@ -62,11 +64,12 @@ function displayResult() {
             displayValue = firstOperand;
           } else {
             if (secondOperand >= 0) {
+              console.log("Hello");
               secondOperand = secondOperand * 10 + +buttonContent;
             } else {
               secondOperand = secondOperand * 10 - +buttonContent;
             }
-            displayValue = firstOperand;
+            displayValue = secondOperand;
           }
           break;
 
@@ -89,11 +92,27 @@ function displayResult() {
           break;
 
         case "=":
+          // TODO:  deal with secondOperand not being selected yet
           displayValue = operate(firstOperand, secondOperand, operator);
           firstOperand = displayValue;
           secondOperand = 0;
           operator = null;
           isFirstOperand = true;
+          break;
+
+        case "/":
+        case "*":
+        case "-":
+        case "+":
+          if (isFirstOperand) {
+            isFirstOperand = false;
+          } else {
+            firstOperand = operate(firstOperand, secondOperand, operator);
+            isFirstOperand = false;
+            displayValue = firstOperand;
+            secondOperand = 0;
+          }
+          operator = buttonContent;
       }
       display.textContent = displayValue;
     })
