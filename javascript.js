@@ -18,6 +18,9 @@ function divide(num1, num2) {
   }
 }
 
+// TODO: Fix overflowing display (recreate 10/3)
+// TODO: Add backspace button
+
 let firstOperand = null;
 let secondOperand = null;
 let operator = null;
@@ -173,7 +176,7 @@ function displayResultMouse() {
             displayValue = secondOperand;
           }
       }
-      display.textContent = displayValue;
+      display.textContent = Math.round(displayValue * 1000) / 1000;
     })
   );
 }
@@ -313,7 +316,8 @@ function displayResultKeyboard() {
           displayValue = secondOperand;
         }
     }
-    display.textContent = displayValue;
+
+    display.textContent = Math.round(displayValue * 1000) / 1000;
   });
 }
 
