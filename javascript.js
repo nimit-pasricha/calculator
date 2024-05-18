@@ -180,13 +180,17 @@ function displayResultMouse() {
           if (isFirstOperand === null) {
             displayValue = 0;
           } else if (isFirstOperand || secondOperand === null) {
-            if (firstOperand != "0") {
+            if (firstOperand.toString().length > 1) {
               firstOperand = firstOperand.toString().slice(0, -1);
+            } else {
+              firstOperand = 0;
             }
             displayValue = firstOperand;
           } else {
-            if (secondOperand != "0") {
+            if (secondOperand.toString().length > 1) {
               secondOperand = secondOperand.toString().slice(0, -1);
+            } else {
+              secondOperand = 0;
             }
             displayValue = secondOperand;
           }
@@ -336,17 +340,21 @@ function displayResultKeyboard() {
           displayValue = secondOperand;
         }
         break;
-      case "<--":
+      case "Delete":
         if (isFirstOperand === null) {
           displayValue = 0;
         } else if (isFirstOperand || secondOperand === null) {
-          if (firstOperand != "0") {
+          if (firstOperand.toString().length > 1) {
             firstOperand = firstOperand.toString().slice(0, -1);
+          } else {
+            firstOperand = 0;
           }
           displayValue = firstOperand;
         } else {
-          if (secondOperand != "0") {
+          if (secondOperand.toString().length > 1) {
             secondOperand = secondOperand.toString().slice(0, -1);
+          } else {
+            secondOperand = 0;
           }
           displayValue = secondOperand;
         }
