@@ -14,8 +14,8 @@ function divide(num1, num2) {
   return num1 / num2;
 }
 
-let firstOperand = 0;
-let secondOperand = 0;
+let firstOperand = null;
+let secondOperand = null;
 let operator = null;
 
 function operate(num1, num2, operator) {
@@ -36,14 +36,13 @@ function displayResult() {
   let displayValue = 0;
 
   const display = document.querySelector("#display");
-  display.textContent = 0;
+  display.textContent = displayValue;
 
   const buttons = document.querySelectorAll("button");
 
   buttons.forEach((button) =>
     button.addEventListener("click", () => {
       const buttonContent = button.textContent;
-      console.log(buttonContent);
       switch (buttonContent) {
         case "0":
         case "1":
@@ -55,7 +54,11 @@ function displayResult() {
         case "7":
         case "8":
         case "9":
-          if (isFirstOperand) {
+          if (isFirstOperand === null) {
+            firstOperand = 0;
+            firstOperand = firstOperand * 10 + +buttonContent;
+            displayValue = firstOperand;
+          } else if (isFirstOperand) {
             if (firstOperand >= 0) {
               firstOperand = firstOperand * 10 + +buttonContent;
             } else {
@@ -64,7 +67,6 @@ function displayResult() {
             displayValue = firstOperand;
           } else {
             if (secondOperand >= 0) {
-              console.log("Hello");
               secondOperand = secondOperand * 10 + +buttonContent;
             } else {
               secondOperand = secondOperand * 10 - +buttonContent;
@@ -74,7 +76,7 @@ function displayResult() {
           break;
 
         case "+/-":
-          if (isFirstOperand) {
+          if (isFirstOperand === null || isFirstOperand) {
             firstOperand = -firstOperand;
             displayValue = firstOperand;
           } else {
@@ -84,33 +86,36 @@ function displayResult() {
           break;
 
         case "Clear":
-          firstOperand = 0;
-          secondOperand = 0;
+          firstOperand = null;
+          secondOperand = null;
           operator = null;
           isFirstOperand = true;
-          displayValue = firstOperand;
+          displayValue = 0;
           break;
 
         case "=":
-          // TODO:  deal with secondOperand not being selected yet
-          displayValue = operate(firstOperand, secondOperand, operator);
-          firstOperand = displayValue;
-          secondOperand = 0;
-          operator = null;
-          isFirstOperand = true;
+          if (secondOperand === null) {
+            // do nothing
+          } else {
+            displayValue = operate(firstOperand, secondOperand, operator);
+            firstOperand = displayValue;
+            secondOperand = null;
+            operator = null;
+            isFirstOperand = null;
+          }
           break;
 
         case "/":
         case "*":
         case "-":
         case "+":
-          if (isFirstOperand) {
+          if (isFirstOperand === null || isFirstOperand) {
             isFirstOperand = false;
           } else {
             firstOperand = operate(firstOperand, secondOperand, operator);
             isFirstOperand = false;
             displayValue = firstOperand;
-            secondOperand = 0;
+            secondOperand = null;
           }
           operator = buttonContent;
       }
