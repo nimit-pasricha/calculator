@@ -109,6 +109,7 @@ function displayResultMouse() {
           displayValue = 0;
           break;
 
+        case "Enter":
         case "=":
           removeAllClasses(operators);
           if (secondOperand === null) {
@@ -248,6 +249,7 @@ function displayResultKeyboard() {
         displayValue = 0;
         break;
 
+      case "Enter":
       case "=":
         removeAllClasses(operators);
         if (secondOperand === null) {
