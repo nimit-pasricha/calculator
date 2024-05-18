@@ -141,11 +141,12 @@ function displayResult() {
             firstOperand = firstOperand + ".";
             isFirstOperandFloating = true;
             displayValue = firstOperand;
+            isFirstOperand = true;
           } else if (isFirstOperand) {
             if (isFirstOperandFloating) {
               // do nothing
             } else {
-              firstOperand = firstOperand + ".";
+              firstOperand = +firstOperand + ".";
               isFirstOperandFloating = true;
             }
             displayValue = firstOperand;
@@ -153,8 +154,7 @@ function displayResult() {
             if (isSecondOperandFloating) {
               // do nothing
             } else {
-              console.log("Hello");
-              secondOperand = secondOperand + ".";
+              secondOperand = +secondOperand + ".";
               isSecondOperandFloating = true;
             }
             displayValue = secondOperand;
