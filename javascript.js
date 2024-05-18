@@ -34,29 +34,36 @@ function operate(num1, num2, operator) {
 function displayResult() {
   let isFirstOperand = true;
   let displayValue = 0;
+  const display = document.querySelector("#display");
+  display.textContent = 0;
+
   const buttons = document.querySelectorAll("button");
   buttons.forEach((button) =>
     button.addEventListener("click", () => {
       const buttonContent = button.textContent;
+      console.log(buttonContent);
       switch (buttonContent) {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 8:
-        case 9:
+        case "0":
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+        case "5":
+        case "6":
+        case "7":
+        case "8":
+        case "9":
           if (isFirstOperand) {
             firstOperand = firstOperand * 10 + +buttonContent;
+            console.log(displayValue);
             displayValue = firstOperand;
           } else {
             secondOperand = secondOperand * 10 + +buttonContent;
             displayValue = secondOperand;
           }
       }
+      display.textContent = displayValue;
     })
   );
 }
+displayResult();
