@@ -11,7 +11,7 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
-  if (num2 === 0) {
+  if (+num2 === 0) {
     return "🤡";
   } else {
     return num1 / num2;
