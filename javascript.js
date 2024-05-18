@@ -34,6 +34,8 @@ function operate(num1, num2, operator) {
 function displayResult() {
   let isFirstOperand = true;
   let displayValue = 0;
+  let isFirstOperandFloating = false;
+  let isSecondOperandFloating = false;
 
   const display = document.querySelector("#display");
   display.textContent = displayValue;
@@ -58,6 +60,7 @@ function displayResult() {
             firstOperand = 0;
             firstOperand = firstOperand * 10 + +buttonContent;
             displayValue = firstOperand;
+            isFirstOperand = true;
           } else if (isFirstOperand) {
             if (firstOperand >= 0) {
               firstOperand = firstOperand * 10 + +buttonContent;
@@ -118,6 +121,28 @@ function displayResult() {
             secondOperand = null;
           }
           operator = buttonContent;
+          break;
+
+        case ".":
+          if (isFirstOperand === null) {
+            firstOperand = 0;
+            displayValue = firstOperand + ".";
+            isFirstOperandFloating = true;
+          } else if (isFirstOperand) {
+            if (isFirstOperandFloating) {
+              // do nothing
+            } else {
+              displayValue = firstOperand + ".";
+              isFirstOperandFloating = true;
+            }
+          } else {
+            if (isSecondOperandFloating) {
+              // do nothing
+            } else {
+              displayValue = secondOperand + ".";
+              isSecondOperandFloating = true;
+            }
+          }
       }
       display.textContent = displayValue;
     })
