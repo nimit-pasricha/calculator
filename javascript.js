@@ -18,7 +18,6 @@ function divide(num1, num2) {
   }
 }
 
-// TODO: Fix overflowing display (recreate 10/3)
 // TODO: Add backspace button
 
 let firstOperand = null;
@@ -70,6 +69,7 @@ function displayResultMouse() {
             isFirstOperand = true;
           } else if (isFirstOperand) {
             if (isFirstOperandFloating) {
+              console.log("Hello");
               firstOperand = +(displayValue.toString() + buttonContent);
             } else {
               if (firstOperand >= 0) {
@@ -104,7 +104,7 @@ function displayResultMouse() {
           break;
 
         case "Clear":
-          removeAllClasses(operators);
+          removeAllBorders(operators);
           firstOperand = null;
           secondOperand = null;
           operator = null;
@@ -114,7 +114,7 @@ function displayResultMouse() {
 
         case "Enter":
         case "=":
-          removeAllClasses(operators);
+          removeAllBorders(operators);
           if (secondOperand === null) {
             // do nothing
           } else {
@@ -132,7 +132,7 @@ function displayResultMouse() {
         case "*":
         case "-":
         case "+":
-          removeAllClasses(operators);
+          removeAllBorders(operators);
           button.classList.add("clicked-operator");
           if (
             secondOperand === null ||
@@ -175,8 +175,28 @@ function displayResultMouse() {
             }
             displayValue = secondOperand;
           }
+          break;
+        case "<--":
+          if (isFirstOperand === null) {
+            displayValue = 0;
+          } else if (isFirstOperand || secondOperand === null) {
+            if (firstOperand != "0") {
+              firstOperand = firstOperand.toString().slice(0, -1);
+            }
+            displayValue = firstOperand;
+          } else {
+            if (secondOperand != "0") {
+              secondOperand = secondOperand.toString().slice(0, -1);
+            }
+            displayValue = secondOperand;
+          }
+          break;
       }
-      display.textContent = displayValue;
+      if (displayValue === null) {
+        display.textContent = 0;
+      } else {
+        display.textContent = displayValue;
+      }
     })
   );
 }
@@ -243,7 +263,7 @@ function displayResultKeyboard() {
         break;
 
       case "Clear":
-        removeAllClasses(operators);
+        removeAllBorders(operators);
         firstOperand = null;
         secondOperand = null;
         operator = null;
@@ -253,7 +273,7 @@ function displayResultKeyboard() {
 
       case "Enter":
       case "=":
-        removeAllClasses(operators);
+        removeAllBorders(operators);
         if (secondOperand === null) {
           // do nothing
         } else {
@@ -271,7 +291,7 @@ function displayResultKeyboard() {
       case "*":
       case "-":
       case "+":
-        removeAllClasses(operators);
+        removeAllBorders(operators);
         const button = Array.from(buttons).reduce(
           (acc, curr) => (acc = curr.textContent === keyPressed ? curr : acc)
         );
@@ -315,13 +335,33 @@ function displayResultKeyboard() {
           }
           displayValue = secondOperand;
         }
+        break;
+      case "<--":
+        if (isFirstOperand === null) {
+          displayValue = 0;
+        } else if (isFirstOperand || secondOperand === null) {
+          if (firstOperand != "0") {
+            firstOperand = firstOperand.toString().slice(0, -1);
+          }
+          displayValue = firstOperand;
+        } else {
+          if (secondOperand != "0") {
+            secondOperand = secondOperand.toString().slice(0, -1);
+          }
+          displayValue = secondOperand;
+        }
+        break;
     }
-    display.textContent = displayValue;
+    if (displayValue === null) {
+      display.textContent = 0;
+    } else {
+      display.textContent = displayValue;
+    }
   });
 }
 
 displayResultKeyboard();
 
-function removeAllClasses(operators) {
+function removeAllBorders(operators) {
   operators.forEach((element) => element.classList.remove("clicked-operator"));
 }
