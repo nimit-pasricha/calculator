@@ -11,7 +11,8 @@ body {
 #display {
   color: white;
   padding-right: 8px;
-  font-size: 48px;
+  padding-bottom: 14px;
+  font-size: 56px;
   width: 396px;
   text-align: right;
 }

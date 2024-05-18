@@ -10,6 +10,7 @@ function multiply(num1, num2) {
   return num1 * num2;
 }
 
+// TODO: CLICKING DIVIDE OR MUTLIPLY TWICE BREAKS EVERYTHING
 function divide(num1, num2) {
   if (+num2 === 0) {
     return "🤡";
@@ -46,7 +47,7 @@ function displayResultMouse() {
   const buttons = document.querySelectorAll("button");
 
   buttons.forEach((button) =>
-    button.addEventListener("click", () => {
+    button.addEventListener("mousedown", () => {
       const buttonContent = button.textContent;
       switch (buttonContent) {
         case "0":
@@ -174,8 +175,8 @@ function displayResultKeyboard() {
   display.textContent = displayValue;
   const body = document.querySelector("body");
 
-  body.addEventListener("keydown", (event) => {
-    const keyPressed = event.key.toString();
+  body.addEventListener("keypress", (event) => {
+    const keyPressed = event.key;
     switch (keyPressed) {
       case "0":
       case "1":
