@@ -149,7 +149,6 @@ function displayResultMouse() {
           break;
 
         case ".":
-          removeAllClasses(operators);
           if (isFirstOperand === null) {
             firstOperand = 0;
             firstOperand = firstOperand + ".";
@@ -290,7 +289,6 @@ function displayResultKeyboard() {
         break;
 
       case ".":
-        removeAllClasses(operators);
         if (isFirstOperand === null) {
           firstOperand = 0;
           firstOperand = firstOperand + ".";
