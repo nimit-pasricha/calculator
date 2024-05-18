@@ -1,63 +1,25 @@
 function add(num1, num2) {
-  const result = +num1 + +num2;
-  if (result.toString().length > 10) {
-    return result.toExponential(2);
-  } else {
-    return result;
-  }
+  return num1 + num2;
 }
 
 function subtract(num1, num2) {
-  const result = +num1 - +num2;
-  if (result.toString().length > 10) {
-    return result.toExponential(2);
-  } else {
-    return result;
-  }
+  return num1 - num2;
 }
 
 function multiply(num1, num2) {
-  const result = +num1 * +num2;
-  if (result.toString().length > 10) {
-    return result.toExponential(2);
-  } else {
-    return result;
-  }
+  return num1 * num2;
 }
 
 function divide(num1, num2) {
-  if (num2 == 0) {
-    return "🤡";
-  } else {
-    const result = +num1 / +num2;
-    if (result.toString().length > 10) {
-      const scientificNotation = result.toExponential(2);
-      if (scientificNotation.toString().split("e")[1].length <= 2) {
-        return result.toFixed(getDigitsBeforeDecimal(result)); //TODO
-      } else {
-        return scientificNotation;
-      }
-    } else {
-      return result;
-    }
-  }
+  return num1 / num2;
 }
 
-function getDigitsBeforeDecimal(num) {
-  return 9 - num.toString().split(".")[0].length;
-}
+let firstOperand;
+let secondOperand;
+let operator;
 
-let firstNumber = 0;
-let secondNumber = 0;
-let operator = null;
-let displayValue = null;
-const buttons = document.querySelectorAll("button");
-const display = document.querySelector("#display");
-display.style.fontSize = "64px";
-let isDecimalPoint = false;
-
-function operate(num1, num2, operation) {
-  switch (operation) {
+function operate(num1, num2, operator) {
+  switch (operator) {
     case "+":
       return add(num1, num2);
     case "-":
@@ -66,147 +28,5 @@ function operate(num1, num2, operation) {
       return multiply(num1, num2);
     case "/":
       return divide(num1, num2);
-    default:
-      return num1;
   }
-}
-
-function displayResult() {
-  display.textContent = 0;
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      if (displayValue === "Clown Behavior") {
-        firstNumber = 0;
-        resetCalculator();
-      }
-
-      switch (button.textContent) {
-        case "0":
-        case "1":
-        case "2":
-        case "3":
-        case "4":
-        case "5":
-        case "6":
-        case "7":
-        case "8":
-        case "9":
-          // check if we are dealing with the first number
-          // or the second number
-          if (operator === null) {
-            if (firstNumber.toString() === "0") {
-              firstNumber = button.textContent;
-              display.textContent = firstNumber;
-            } else {
-              if (firstNumber.toString().length < 10) {
-                firstNumber = firstNumber + button.textContent;
-              }
-              display.textContent = firstNumber;
-            }
-          } else if (operator === "=") {
-            if (isDecimalPoint) {
-              firstNumber = firstNumber + button.textContent;
-            } else {
-              firstNumber = button.textContent;
-            }
-            display.textContent = firstNumber;
-            operator = null;
-          } else {
-            if (secondNumber.toString() === "0") {
-              secondNumber = button.textContent;
-              display.textContent = secondNumber;
-            } else {
-              if (secondNumber.toString().length < 10) {
-                secondNumber = secondNumber + button.textContent;
-              }
-              display.textContent = secondNumber;
-            }
-          }
-          break;
-
-        case ".":
-          if (operator === "=") {
-            firstNumber = 0 + ".";
-            display.textContent = firstNumber;
-          } else if (operator === null) {
-            if (
-              !firstNumber.toString().includes(".") &&
-              firstNumber.toString().length < 10
-            ) {
-              firstNumber = firstNumber + ".";
-            }
-            display.textContent = firstNumber;
-          } else {
-            if (
-              !secondNumber.toString().includes(".") &&
-              secondNumber.toString().length < 10
-            ) {
-              secondNumber = secondNumber + ".";
-            }
-            display.textContent = secondNumber;
-          }
-          isDecimalPoint = true;
-          break;
-        case "+/-":
-          if (operator === null || operator === "=") {
-            if (firstNumber.toString()[0] === "-") {
-              firstNumber = firstNumber.toString().slice(1);
-            } else if (firstNumber.toString().length < 11) {
-              firstNumber = "-" + firstNumber;
-            }
-            display.textContent = firstNumber;
-          } else {
-            if (secondNumber.toString()[0] === "-") {
-              secondNumber = secondNumber.toString().slice(1);
-            } else if (secondNumber.toString().length < 11) {
-              secondNumber = "-" + secondNumber;
-            }
-            display.textContent = secondNumber;
-          }
-          break;
-
-        case "+":
-        case "-":
-        case "*":
-        case "/":
-          if (secondNumber === 0) {
-            operator = button.textContent;
-            display.textContent = firstNumber;
-          } else {
-            displayValue = operate(firstNumber, secondNumber, operator);
-            display.textContent = displayValue;
-            operator = button.textContent;
-            // this is done because the displayValue is what we are going
-            // to operate on next
-            firstNumber = displayValue;
-            secondNumber = 0;
-          }
-          isDecimalPoint = false;
-          break;
-
-        case "=":
-          displayValue = operate(firstNumber, secondNumber, operator);
-          display.textContent = displayValue;
-          firstNumber = displayValue;
-          operator = "=";
-          secondNumber = null;
-          isDecimalPoint = false;
-          break;
-
-        case "Clear":
-          resetCalculator();
-      }
-    });
-  });
-}
-displayResult();
-
-function resetCalculator() {
-  firstNumber = 0;
-  secondNumber = 0;
-  operator = null;
-  displayValue = null;
-  display.textContent = firstNumber;
-  isDecimalPoint = false;
 }
