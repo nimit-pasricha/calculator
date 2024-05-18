@@ -176,7 +176,7 @@ function displayResultMouse() {
             displayValue = secondOperand;
           }
       }
-      display.textContent = Math.round(displayValue * 1000) / 1000;
+      display.textContent = displayValue;
     })
   );
 }
@@ -316,8 +316,7 @@ function displayResultKeyboard() {
           displayValue = secondOperand;
         }
     }
-
-    display.textContent = Math.round(displayValue * 1000) / 1000;
+    display.textContent = displayValue;
   });
 }
 
