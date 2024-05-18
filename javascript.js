@@ -126,7 +126,9 @@ function displayResultMouse() {
         case "*":
         case "-":
         case "+":
-          if (isFirstOperand === null || isFirstOperand) {
+          if (secondOperand === null) {
+            isFirstOperand = false;
+          } else if (isFirstOperand === null || isFirstOperand) {
             isFirstOperand = false;
           } else {
             firstOperand = operate(firstOperand, secondOperand, operator);
@@ -254,7 +256,9 @@ function displayResultKeyboard() {
       case "*":
       case "-":
       case "+":
-        if (isFirstOperand === null || isFirstOperand) {
+        if (secondOperand === null) {
+          isFirstOperand = false;
+        } else if (isFirstOperand === null || isFirstOperand) {
           isFirstOperand = false;
         } else {
           firstOperand = operate(firstOperand, secondOperand, operator);
