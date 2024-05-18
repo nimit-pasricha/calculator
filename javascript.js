@@ -77,7 +77,6 @@ function displayResultMouse() {
             }
             displayValue = firstOperand;
           } else {
-            removeAllClasses(operators);
             if (isSecondOperandFloating) {
               secondOperand = +(displayValue.toString() + buttonContent);
             } else {
@@ -185,6 +184,7 @@ function displayResultKeyboard() {
   display.textContent = displayValue;
   const body = document.querySelector("body");
   const operators = document.querySelectorAll(".operator");
+  const buttons = document.querySelectorAll("button");
 
   body.addEventListener("keypress", (event) => {
     const keyPressed = event.key;
@@ -216,7 +216,6 @@ function displayResultKeyboard() {
           }
           displayValue = firstOperand;
         } else {
-          removeAllClasses(operators);
           if (isSecondOperandFloating) {
             secondOperand = +(displayValue.toString() + keyPressed);
           } else {
@@ -269,6 +268,9 @@ function displayResultKeyboard() {
       case "-":
       case "+":
         removeAllClasses(operators);
+        const button = Array.from(buttons).reduce(
+          (acc, curr) => (acc = curr.textContent === keyPressed ? curr : acc)
+        );
         button.classList.add("clicked-operator");
         if (secondOperand === null) {
           isFirstOperand = false;
