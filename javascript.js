@@ -18,8 +18,6 @@ function divide(num1, num2) {
   }
 }
 
-// TODO: Add backspace button
-
 let firstOperand = null;
 let secondOperand = null;
 let operator = null;
