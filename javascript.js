@@ -211,8 +211,9 @@ function displayResultKeyboard() {
   const operators = document.querySelectorAll(".operator");
   const buttons = document.querySelectorAll("button");
 
-  body.addEventListener("keypress", (event) => {
+  body.addEventListener("keydown", (event) => {
     const keyPressed = event.key;
+    console.log(keyPressed);
     switch (keyPressed) {
       case "0":
       case "1":
@@ -338,7 +339,7 @@ function displayResultKeyboard() {
           displayValue = secondOperand;
         }
         break;
-      case "Delete":
+      case "Backspace":
         if (isFirstOperand === null) {
           displayValue = 0;
         } else if (isFirstOperand || secondOperand === null) {
