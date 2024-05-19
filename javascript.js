@@ -1,12 +1,21 @@
 function add(num1, num2) {
+  if (num1 === "-" || num2 === "-") {
+    return "🤡";
+  }
   return num1 + num2;
 }
 
 function subtract(num1, num2) {
+  if (num1 === "-" || num2 === "-") {
+    return "🤡";
+  }
   return num1 - num2;
 }
 
 function multiply(num1, num2) {
+  if (num1 === "-" || num2 === "-") {
+    return "🤡";
+  }
   return num1 * num2;
 }
 
@@ -183,6 +192,7 @@ function displayResultMouse() {
             } else {
               firstOperand = 0;
             }
+            isFirstOperandFloating = firstOperand.toString().includes(".");
             displayValue = firstOperand;
           } else {
             if (secondOperand.toString().length > 1) {
@@ -190,6 +200,7 @@ function displayResultMouse() {
             } else {
               secondOperand = 0;
             }
+            isSecondOperandFloating = secondOperand.toString().includes(".");
             displayValue = secondOperand;
           }
           break;
@@ -348,6 +359,7 @@ function displayResultKeyboard() {
           } else {
             firstOperand = 0;
           }
+          isFirstOperandFloating = firstOperand.toString().includes(".");
           displayValue = firstOperand;
         } else {
           if (secondOperand.toString().length > 1) {
@@ -355,6 +367,7 @@ function displayResultKeyboard() {
           } else {
             secondOperand = 0;
           }
+          isSecondOperandFloating = secondOperand.toString().includes(".");
           displayValue = secondOperand;
         }
         break;
