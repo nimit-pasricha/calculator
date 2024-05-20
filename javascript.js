@@ -72,7 +72,7 @@ function displayResultMouse() {
             isFirstOperand = true;
           } else if (isFirstOperand) {
             if (isFirstOperandFloating) {
-              firstOperand = +(displayValue.toString() + buttonContent);
+              firstOperand = displayValue.toString() + buttonContent;
             } else {
               if (firstOperand == 0 || firstOperand === null) {
                 firstOperand = buttonContent;
@@ -164,7 +164,7 @@ function displayResultMouse() {
             if (isFirstOperandFloating) {
               // do nothing
             } else {
-              firstOperand = +firstOperand + ".";
+              firstOperand = firstOperand + ".";
               isFirstOperandFloating = true;
             }
             displayValue = firstOperand;
@@ -172,7 +172,7 @@ function displayResultMouse() {
             if (isSecondOperandFloating) {
               // do nothing
             } else {
-              secondOperand = +secondOperand + ".";
+              secondOperand = secondOperand + ".";
               isSecondOperandFloating = true;
             }
             displayValue = secondOperand;
@@ -237,7 +237,7 @@ function displayResultKeyboard() {
           isFirstOperand = true;
         } else if (isFirstOperand) {
           if (isFirstOperandFloating) {
-            firstOperand = +(displayValue.toString() + keyPressed);
+            firstOperand = displayValue.toString() + keyPressed;
           } else {
             if (firstOperand == 0 || firstOperand === null) {
               firstOperand = keyPressed;
@@ -330,7 +330,7 @@ function displayResultKeyboard() {
           if (isFirstOperandFloating) {
             // do nothing
           } else {
-            firstOperand = +firstOperand + ".";
+            firstOperand = firstOperand + ".";
             isFirstOperandFloating = true;
           }
           displayValue = firstOperand;
@@ -338,7 +338,7 @@ function displayResultKeyboard() {
           if (isSecondOperandFloating) {
             // do nothing
           } else {
-            secondOperand = +secondOperand + ".";
+            secondOperand = secondOperand + ".";
             isSecondOperandFloating = true;
           }
           displayValue = secondOperand;
