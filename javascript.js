@@ -366,11 +366,11 @@ function displayResultKeyboard() {
         }
         break;
     }
+
     if (displayValue === null) {
-      display.textContent = 0;
-    } else {
-      display.textContent = displayValue;
+      displayValue = 0;
     }
+    display.textContent = displayValue;
   });
 }
 
