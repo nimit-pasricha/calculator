@@ -67,19 +67,17 @@ function displayResultMouse() {
         case "8":
         case "9":
           if (isFirstOperand === null) {
-            firstOperand = 0;
-            firstOperand = firstOperand * 10 + +buttonContent;
+            firstOperand = buttonContent;
             displayValue = firstOperand;
             isFirstOperand = true;
           } else if (isFirstOperand) {
             if (isFirstOperandFloating) {
-              console.log("Hello");
               firstOperand = +(displayValue.toString() + buttonContent);
             } else {
-              if (firstOperand >= 0) {
-                firstOperand = firstOperand * 10 + +buttonContent;
+              if (firstOperand == 0 || firstOperand === null) {
+                firstOperand = buttonContent;
               } else {
-                firstOperand = firstOperand * 10 - +buttonContent;
+                firstOperand = firstOperand.toString() + buttonContent;
               }
             }
             displayValue = firstOperand;
@@ -87,10 +85,10 @@ function displayResultMouse() {
             if (isSecondOperandFloating) {
               secondOperand = +(displayValue.toString() + buttonContent);
             } else {
-              if (secondOperand >= 0) {
-                secondOperand = secondOperand * 10 + +buttonContent;
+              if (secondOperand == 0 || secondOperand === null) {
+                secondOperand = buttonContent;
               } else {
-                secondOperand = secondOperand * 10 - +buttonContent;
+                secondOperand = secondOperand.toString() + buttonContent;
               }
             }
             displayValue = secondOperand;
@@ -234,18 +232,17 @@ function displayResultKeyboard() {
       case "8":
       case "9":
         if (isFirstOperand === null) {
-          firstOperand = 0;
-          firstOperand = firstOperand * 10 + +keyPressed;
+          firstOperand = keyPressed;
           displayValue = firstOperand;
           isFirstOperand = true;
         } else if (isFirstOperand) {
           if (isFirstOperandFloating) {
             firstOperand = +(displayValue.toString() + keyPressed);
           } else {
-            if (firstOperand >= 0) {
-              firstOperand = firstOperand * 10 + +keyPressed;
+            if (firstOperand == 0 || firstOperand === null) {
+              firstOperand = keyPressed;
             } else {
-              firstOperand = firstOperand * 10 - +keyPressed;
+              firstOperand = firstOperand.toString() + keyPressed;
             }
           }
           displayValue = firstOperand;
@@ -253,10 +250,10 @@ function displayResultKeyboard() {
           if (isSecondOperandFloating) {
             secondOperand = +(displayValue.toString() + keyPressed);
           } else {
-            if (secondOperand >= 0) {
-              secondOperand = secondOperand * 10 + +keyPressed;
+            if (secondOperand == 0 || secondOperand === null) {
+              secondOperand = keyPressed;
             } else {
-              secondOperand = secondOperand * 10 - +keyPressed;
+              secondOperand = secondOperand.toString() + keyPressed;
             }
           }
           displayValue = secondOperand;
