@@ -71,24 +71,28 @@ function displayResultMouse() {
             displayValue = firstOperand;
             isFirstOperand = true;
           } else if (isFirstOperand) {
-            if (isFirstOperandFloating) {
-              firstOperand = displayValue.toString() + buttonContent;
-            } else {
-              if (firstOperand == 0 || firstOperand === null) {
-                firstOperand = buttonContent;
+            if ((+firstOperand).toString().length < 12) {
+              if (isFirstOperandFloating) {
+                firstOperand = displayValue.toString() + buttonContent;
               } else {
-                firstOperand = firstOperand.toString() + buttonContent;
+                if (firstOperand == 0 || firstOperand === null) {
+                  firstOperand = buttonContent;
+                } else {
+                  firstOperand = firstOperand.toString() + buttonContent;
+                }
               }
             }
             displayValue = firstOperand;
           } else {
-            if (isSecondOperandFloating) {
-              secondOperand = +(displayValue.toString() + buttonContent);
-            } else {
-              if (secondOperand == 0 || secondOperand === null) {
-                secondOperand = buttonContent;
+            if ((+secondOperand).toString().length < 12) {
+              if (isSecondOperandFloating) {
+                secondOperand = +(displayValue.toString() + buttonContent);
               } else {
-                secondOperand = secondOperand.toString() + buttonContent;
+                if (secondOperand == 0 || secondOperand === null) {
+                  secondOperand = buttonContent;
+                } else {
+                  secondOperand = secondOperand.toString() + buttonContent;
+                }
               }
             }
             displayValue = secondOperand;
@@ -236,24 +240,28 @@ function displayResultKeyboard() {
           displayValue = firstOperand;
           isFirstOperand = true;
         } else if (isFirstOperand) {
-          if (isFirstOperandFloating) {
-            firstOperand = displayValue.toString() + keyPressed;
-          } else {
-            if (firstOperand == 0 || firstOperand === null) {
-              firstOperand = keyPressed;
+          if ((+firstOperand).toString().length < 12) {
+            if (isFirstOperandFloating) {
+              firstOperand = displayValue.toString() + keyPressed;
             } else {
-              firstOperand = firstOperand.toString() + keyPressed;
+              if (firstOperand == 0 || firstOperand === null) {
+                firstOperand = keyPressed;
+              } else {
+                firstOperand = firstOperand.toString() + keyPressed;
+              }
             }
           }
           displayValue = firstOperand;
         } else {
-          if (isSecondOperandFloating) {
-            secondOperand = +(displayValue.toString() + keyPressed);
-          } else {
-            if (secondOperand == 0 || secondOperand === null) {
-              secondOperand = keyPressed;
+          if ((+secondOperand).toString().length < 12) {
+            if (isSecondOperandFloating) {
+              secondOperand = +(displayValue.toString() + keyPressed);
             } else {
-              secondOperand = secondOperand.toString() + keyPressed;
+              if (secondOperand == 0 || secondOperand === null) {
+                secondOperand = keyPressed;
+              } else {
+                secondOperand = secondOperand.toString() + keyPressed;
+              }
             }
           }
           displayValue = secondOperand;
