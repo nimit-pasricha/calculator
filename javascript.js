@@ -1,20 +1,20 @@
 function add(num1, num2) {
-  return +(num1 + num2).toFixed(12);
+  return +(+num1 + +num2).toFixed(12);
 }
 
 function subtract(num1, num2) {
-  return +(num1 - num2).toFixed(12);
+  return +(+num1 - +num2).toFixed(12);
 }
 
 function multiply(num1, num2) {
-  return +(num1 * num2).toFixed(12);
+  return +(+num1 * +num2).toFixed(12);
 }
 
 function divide(num1, num2) {
   if (+num2 === 0) {
     return "🤡";
   } else {
-    return +(num1 / num2).toFixed(12);
+    return +(+num1 / +num2).toFixed(12);
   }
 }
 
@@ -71,24 +71,28 @@ function displayResultMouse() {
             displayValue = firstOperand;
             isFirstOperand = true;
           } else if (isFirstOperand) {
-            if (isFirstOperandFloating) {
-              firstOperand = +(displayValue.toString() + buttonContent);
-            } else {
-              if (firstOperand == 0 || firstOperand === null) {
-                firstOperand = buttonContent;
+            if (displayValue.toString().length < 12) {
+              if (isFirstOperandFloating) {
+                firstOperand = +(displayValue.toString() + buttonContent);
               } else {
-                firstOperand = firstOperand.toString() + buttonContent;
+                if (firstOperand == 0 || firstOperand === null) {
+                  firstOperand = buttonContent;
+                } else {
+                  firstOperand = firstOperand.toString() + buttonContent;
+                }
               }
             }
             displayValue = firstOperand;
           } else {
-            if (isSecondOperandFloating) {
-              secondOperand = +(displayValue.toString() + buttonContent);
-            } else {
-              if (secondOperand == 0 || secondOperand === null) {
-                secondOperand = buttonContent;
+            if (displayValue.toString().length < 12) {
+              if (isSecondOperandFloating) {
+                secondOperand = +(displayValue.toString() + buttonContent);
               } else {
-                secondOperand = secondOperand.toString() + buttonContent;
+                if (secondOperand == 0 || secondOperand === null) {
+                  secondOperand = buttonContent;
+                } else {
+                  secondOperand = secondOperand.toString() + buttonContent;
+                }
               }
             }
             displayValue = secondOperand;
@@ -200,11 +204,11 @@ function displayResultMouse() {
           }
           break;
       }
+
       if (displayValue === null) {
-        display.textContent = 0;
-      } else {
-        display.textContent = displayValue;
+        displayValue = 0;
       }
+      display.textContent = displayValue;
     })
   );
 }
