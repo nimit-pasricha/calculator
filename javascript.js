@@ -71,28 +71,24 @@ function displayResultMouse() {
             displayValue = firstOperand;
             isFirstOperand = true;
           } else if (isFirstOperand) {
-            if (displayValue.toString().length < 12) {
-              if (isFirstOperandFloating) {
-                firstOperand = +(displayValue.toString() + buttonContent);
+            if (isFirstOperandFloating) {
+              firstOperand = +(displayValue.toString() + buttonContent);
+            } else {
+              if (firstOperand == 0 || firstOperand === null) {
+                firstOperand = buttonContent;
               } else {
-                if (firstOperand == 0 || firstOperand === null) {
-                  firstOperand = buttonContent;
-                } else {
-                  firstOperand = firstOperand.toString() + buttonContent;
-                }
+                firstOperand = firstOperand.toString() + buttonContent;
               }
             }
             displayValue = firstOperand;
           } else {
-            if (displayValue.toString().length < 12) {
-              if (isSecondOperandFloating) {
-                secondOperand = +(displayValue.toString() + buttonContent);
+            if (isSecondOperandFloating) {
+              secondOperand = +(displayValue.toString() + buttonContent);
+            } else {
+              if (secondOperand == 0 || secondOperand === null) {
+                secondOperand = buttonContent;
               } else {
-                if (secondOperand == 0 || secondOperand === null) {
-                  secondOperand = buttonContent;
-                } else {
-                  secondOperand = secondOperand.toString() + buttonContent;
-                }
+                secondOperand = secondOperand.toString() + buttonContent;
               }
             }
             displayValue = secondOperand;
